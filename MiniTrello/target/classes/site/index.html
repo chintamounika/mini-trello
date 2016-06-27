@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/html">
+
+<head>
+    <title>Mini Trello</title>
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>-->
+
+    <script src="trello/controllers/cardController.js"></script>
+    <style>
+        .fade.ng-hide {
+            transition:0.5s linear all;
+            opacity:0;
+        }
+    </style>
+    <!--<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/css/bootcards-desktop.min.css">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootcards/1.0.0/js/bootcards.min.js"></script>
+    -->
+
+</head>
+
+<body class="w3-container" >
+<h1 style="color: blue">Mini Trello Application</h1>
+
+
+<div ng-app="trelloApp" ng-controller="cardCtrl" class="w3-row">
+  <!--  <Button   ng-click="addNewCard()"> Add Card</Button> -->
+    <hr>
+    <span id="toast_text" class="w3-center fade" ng-show="showToast"  style="position: absolute; top: 90px; left: 40%; height: 40px;" > <h4 style="color: green">Card saved</h4></span>
+
+    <div style="height: 20px"></div>
+    <div class="w3-card-4 w3-col s2 " style="width:300px; margin-top: 10px; margin-left: 25px; margin-bottom: 10px" ng-repeat="(id, card) in cardList">
+
+
+        <div  class="w3-right">
+            <input class="w3-text-white" type="image" src="trello/images/delete2.jpg"  alt="X" width="20" height="20"   ng-click="deleteCard(card.id)">
+        </div>
+
+        <header class="w3-container " style="background-color:#FC9F85 ">
+
+
+            <h4><input class="w3-input w3-left"  style="background-color:#FC9F85" type="text" ng-model="card.title" placeholder="Title"></h4>
+
+
+        </header>
+
+
+        <div class="w3-container" style="background-color:#F1FC7E" >
+
+            <p><input style="height : 60px ;background-color:#F1FC7E" class="w3-input   " required="true" type="text" ng-model="card.description" placeholder="Description"></p>
+
+            <div ng-repeat="entry in card.checklist"  class="w3-container w3-leftbar w3-border-orange " style="height: 30px ; background-color:#F3FC94" >
+
+
+                <input style="display: inline-block; float: left; width:30px; margin-top: 7.5px"  class="w3-input  " type="checkbox" ng-model="entry.status" class="w3-green" id="{{'box'+ card.id +'#' + entry.id}}">
+                <input style="display: inline-block; float: left; width:170px; height: 30px; background-color:#F3FC94"   class="w3-input " type="text" placeholder="Item" ng-model="entry.item" class="w3-green" id="{{'item'+card.id +'#' + entry.id}}">
+                <div style="display: inline-block; float: left;height : 30px; width: 30px">
+                <input align="center" style="width:15px; height: 15px ;display: block; margin-top: 7.5px"  type="image" src="trello/images/minus1.png"   ng-click="removeCardItem(card.id,entry.id)">
+
+                </div>
+
+
+            </div>
+            <div  class="w3-container w3-center" >
+
+                    <input type="image" title="Add an item" style="  display: block; margin: auto ;   margin-right: auto; margin-top: 7.5px;margin-bottom: 7.5px "src="trello/images/plus.JPG"  alt="add" width="30" height="30"   ng-click="addCardItem(card.id)">
+            </div>
+
+        </div>
+
+        <button type="submit" id="save" class="w3-btn-block " style=" background-color:#47FF74" ng-click="saveCard(card.id)"> Save</button>
+
+    </div>
+
+
+    <input type="image" class="w3-col s2" title="Add a card"  style="  width:150px; height:150px;display: block; margin: auto ;   margin-left: 20px; margin-top: 50px;margin-bottom: 50px"  ng-click="addNewCard()"src="trello/images/add2.png"  alt="add" width="100" height="100"  >
+
+
+
+
+
+
+</div>
+
+
+
+</body>
+</html>
